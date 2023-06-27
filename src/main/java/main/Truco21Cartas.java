@@ -1,33 +1,45 @@
 package main;
 
-import java.util.Scanner;
 import java.util.Random;
 
 public class Truco21Cartas {
 
     public static void main(String[] args) {
-        var entrada= new Scanner(System.in);
-        var sorteador= new Random();
-        int i, j;
-        char[] arregloSinRepetir= new char[21];
+        final short MAX_TARJETAS_GRUPO= 7; // Tarjetas por grupo.
+        final short MAX_GRUPOS= 3; // Cantidad de grupos.
+        final short MAX_TARJETAS= MAX_TARJETAS_GRUPO*MAX_GRUPOS; //Total de tarjetas.
+        final short MIN_TARJETA_VALOR='A';
+        final short MAX_TARJETA_VALOR= (char)(MAX_TARJETAS+(int)('A')-1); //Tarjeta final.
+        var generadorCarta= new Random();
         char carta;
-        char[][] secuencia= new char[7][3];
-
-        //Generador de caracteres aleatorios sin repetir
-        for (i=0; i<21; i++) {
-            carta= (char)(sorteador.nextInt(85-65+1)+65);
+        int i,j;
+        
+        
+        char[] grupo1= new char[MAX_TARJETAS_GRUPO],
+               grupo2= new char[MAX_TARJETAS_GRUPO],
+               grupo3= new char[MAX_TARJETAS_GRUPO];
+        char[] deck= new char[MAX_TARJETAS];
+        
+        //Generar letras al azar:
+        for(i=0; i<MAX_TARJETAS; i++){
+            carta= (char)(generadorCarta.nextInt(MAX_TARJETA_VALOR-(int)(MIN_TARJETA_VALOR)+1)+(int)(MIN_TARJETA_VALOR));
             j=0;
             while(j<i){
-                if(arregloSinRepetir[j]==carta){
-                    carta= (char)(sorteador.nextInt(85-65+1)+65);
+                if(deck[j]==carta){
                     j=0;
-                } else {
+                    carta= (char)(generadorCarta.nextInt(MAX_TARJETA_VALOR-(int)(MIN_TARJETA_VALOR)+1)+(int)(MIN_TARJETA_VALOR));
+                } else{
                     j++;
                 }
             }
-            arregloSinRepetir[i]=carta;
+            deck[i]=carta;
         }
         
-        System.out.println("Haremos 3 secuencias. Empecemos...");
+        //Mostrar cartas
+        for( char card : deck){
+            System.out.print(card+" ");
+        };
+        
     }
+        
 }
