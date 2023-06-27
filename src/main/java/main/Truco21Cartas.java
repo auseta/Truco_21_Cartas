@@ -12,7 +12,7 @@ public class Truco21Cartas {
         final short MAX_TARJETA_VALOR= (char)(MAX_TARJETAS+(int)('A')-1); //Tarjeta final.
         var generadorCarta= new Random();
         char carta;
-        int i,j;
+        int i,j,indice;
         
         
         char[] grupo1= new char[MAX_TARJETAS_GRUPO],
@@ -35,10 +35,55 @@ public class Truco21Cartas {
             deck[i]=carta;
         }
         
-        //Mostrar cartas
+        //Asignar cartas a las celdas de los grupos
+        j=0;
+        for (i=0; i<MAX_GRUPOS; i++) {
+            indice=0;
+            while(indice<7){
+                switch (i) {
+                    case 0:
+                        grupo1[indice]=deck[j];
+                        indice++;
+                        j++;
+                        break;
+                    case 1:
+                        grupo2[indice]=deck[j];
+                        indice++;
+                        j++;
+                        break;
+                    case 2:
+                        grupo3[indice]=deck[j];
+                        indice++;
+                        j++;
+                        break;
+                    default:
+                        break;
+                }   
+            }
+        }
+        
+        // >>>Mostrar cartas
         for( char card : deck){
             System.out.print(card+" ");
         };
+        
+        System.out.println();
+        
+        for(char card1 : grupo1){
+            System.out.print(card1+" ");
+        }
+        
+        System.out.println();
+        
+        for(char card2 : grupo2){
+            System.out.print(card2+" ");
+        }
+        
+        System.out.println();
+        
+        for(char card3 : grupo3){
+            System.out.print(card3+" ");
+        }
         
     }
         
